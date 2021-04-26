@@ -1,0 +1,17 @@
+
+
+
+.messagebrowser{
+    background-color: deepskyblue;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.messagetitle{
+    background-color: white;
+}
+
+.messagelog{
+    background-color: lightblue;
+}
