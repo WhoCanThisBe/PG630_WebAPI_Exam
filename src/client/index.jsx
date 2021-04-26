@@ -1,5 +1,10 @@
 import React from "react";
-import { render } from "react-dom";
+import ReactDom, { render } from "react-dom";
 import { App } from "./App";
 
-render(<App />, document.getElementById("app"));
+ReactDom.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("app")
+);

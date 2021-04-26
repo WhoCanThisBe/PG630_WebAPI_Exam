@@ -7,7 +7,7 @@ const server = http.Server(app);
 const host = process.env.APP_HOST || "http://localhost";
 const port = process.env.APP_PORT || 3000;
 
-// Listen for trafic on specified port
+// Listen for traffic on specified port
 server.listen(port, () => {
   console.log(`The server was started on ${host}:${port}`);
 });
