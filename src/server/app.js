@@ -5,43 +5,38 @@ const path = require("path");
 const session = require("express-session");
 const authApi = require("./routes/auth-api");
 const passport = require("passport");
-const {verifyUser} = require("./db/users");
-const {getUser} = require("./db/users");
+const { verifyUser } = require("./db/users");
+const { getUser } = require("./db/users");
 const LocalStrategy = require("passport-local").Strategy;
-
 
 const app = express();
 
 //JSON body parse without bodyparser
 app.use(express.json());
 
-
 // Express session
 app.use(
-    session({
-      secret: "dasssfdf",
-      resave: false,
-      saveUninitialized: false,
-    })
+  session({
+    secret: "dasssfdf",
+    resave: false,
+    saveUninitialized: false,
+  })
 );
 
-
 const authFields = {
-  usernameField: "userId",
+  usernameField: "email",
   passwordField: "password",
 };
 
-
 passport.use(
-    new LocalStrategy(authFields, (userId, password, done) => {
-      if (verifyUser(userId, password)) {
-        done(null, getUser(userId));
-      } else {
-        done(null, false, { message: "Invalid username/password" });
-      }
-    })
+  new LocalStrategy(authFields, (userId, password, done) => {
+    if (verifyUser(userId, password)) {
+      done(null, getUser(userId));
+    } else {
+      done(null, false, { message: "Invalid username/password" });
+    }
+  })
 );
-
 
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) => {
@@ -52,10 +47,8 @@ passport.deserializeUser((id, done) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 //routes
 app.use("/api", authApi);
-
 
 // Server static content from parcel-dist bundle
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));

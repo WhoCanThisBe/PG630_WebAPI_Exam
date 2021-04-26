@@ -4,16 +4,21 @@ import { useSubmit } from "../lib/useSubmit";
 import { NAV_PATH, USER_AUTH_ENDPOINT } from "../../shared/constant";
 import { post } from "../lib/http";
 
-
 const SignUp = ({ setLoggedIn, ...props }) => {
-  const [userId, setUserId] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  //const [userId, setUserId] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirm, onConfirmChange] = useState("");
+
   const history = useHistory();
 
   const { handleSubmit, submitting, error } = useSubmit(
     //this is for reason of the lectures I had when making the quiz part. so this time, having a own fetch to work around
-    () => post(USER_AUTH_ENDPOINT.SIGNUP, { userId, password }),
+    () =>
+      post(USER_AUTH_ENDPOINT.SIGNUP, { firstName, lastName, email, password }),
     () => {
       // TODO: Remove/change this after setting up WebSockets
       // Trigger fetching of userInfo in App
@@ -24,24 +29,49 @@ const SignUp = ({ setLoggedIn, ...props }) => {
 
   const isTheSame = password === confirm;
 
-  let confirmMsg = isTheSame ? "ok" : "not the same";
+  let confirmMsg = isTheSame ? " " : "The typed password does not match";
 
   return (
     <div className="center">
       <form onSubmit={handleSubmit}>
         <h1>Signup</h1>
         <label>
-          User Id:
+          First Name
           <br />
           <input
             type="text"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </label>
         <br />
         <br />
+        <label>
+          Last Name:
+          <br />
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </label>
+        <br />
+        <br />
+        <label>
+          Email:
+          <br />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        <br />
+        <br />
+
         <label>
           Password:
           <br />

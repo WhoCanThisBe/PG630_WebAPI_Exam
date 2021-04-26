@@ -19,7 +19,9 @@ export function Header({ user, onLogout, ...props }) {
   // then can use "!isLoggedIn" in an if-block
   // and don't have to worry about the value being inverted, which would happen if the value was truthy/falsy...)
   const isLoggedIn = !!user;
-  const message = isLoggedIn ? `welcome ${user.id}` : "You are not logged in";
+  const message = isLoggedIn
+    ? `welcome ${user.firstName} ${user.lastName}`
+    : "You are not logged in";
 
   let buttons = (
     <>
