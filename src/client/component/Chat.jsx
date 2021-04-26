@@ -1,12 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { fetchJson } from "../lib/http";
+import { USER_AUTH_ENDPOINT } from "../../shared/constant";
 
 export function Chat({ user, onSendMessage, chatLog, ...props }) {
   const [message, setMessage] = useState("");
+  const [loginList, setLoginList] = useState([]);
+  const [receiver, setReceiver] = useState("");
+
+  useEffect(() => {
+    fetchLoggedInlist();
+  }, []);
+
+  const fetchLoggedInlist = async () => {
+    try {
+      const payload = await fetchJson(USER_AUTH_ENDPOINT.LOGGEDIN);
+      console.log(payload);
+      setLoginList(payload);
+    } catch (err) {}
+  };
 
   function handleSubmitChatMessage(e) {
     e.preventDefault();
     const name = `${user.firstName} ${user.lastName}`;
-    onSendMessage({ name, message });
+
+    onSendMessage({ name, message, receiver });
     setMessage("");
   }
 
@@ -51,6 +68,18 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
           name={"chatText"}
           onChange={(e) => setMessage(e.target.value)}
         />
+        <select
+          className={"userList"}
+          onChange={(event) => {
+            setReceiver(event.target.value);
+          }}
+        >
+          {loginList.map((val, key) => (
+            <option key={key} value={val}>
+              {val}
+            </option>
+          ))}
+        </select>
         <button type={"submit"}>Submit</button>
       </form>
     </aside>

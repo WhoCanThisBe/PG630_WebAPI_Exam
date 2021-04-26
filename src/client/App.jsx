@@ -32,6 +32,8 @@ export function App() {
   const [chatLog, setChatLog] = useState([]);
   const connected = useRef(false);
 
+  //https://stackoverflow.com/questions/51316727/how-do-i-send-a-message-to-a-specific-user-in-ws-library
+
   function connectWS() {
     console.log("WS -> Connecting");
     // host => localhost:3000
@@ -97,6 +99,7 @@ export function App() {
             <Chat
               user={user}
               chatLog={chatLog}
+              socket={clientSocket}
               onSendMessage={handleSendMessage}
             />
           </Home>

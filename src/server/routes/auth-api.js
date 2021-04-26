@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const { StatusCode } = require("status-code-enum");
 const userDatabase = require("../db/users");
+const { getUserList, logoutUsers } = require("../db/users");
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
   req.session.userId = req.user;
@@ -41,6 +42,13 @@ router.get("/user", (req, res) => {
   const { password, ...user } = req.user;
 
   res.status(StatusCode.SuccessOK).json(user);
+});
+
+router.get("/userlist", (req, res) => {
+  const loggedInList = getUserList();
+  console.log("Users:");
+  console.log(loggedInList);
+  res.status(StatusCode.SuccessOK).json(loggedInList);
 });
 
 module.exports = router;
