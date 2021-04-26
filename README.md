@@ -10,6 +10,13 @@
 * [ ] Users should be able to respond to messages
 ---
 
+## How to use the application ##
+
+1. `npm install`...
+2. `npm start`...
+3. `npm test`...
+
+
 ## The structure of the application ##
 
 ...
@@ -48,3 +55,5 @@
 # Sources/Credits #
 
 NB: All sources used that can't be placed as a comment in the code, should be placed here.
+
+[ ] boiler plat was predon, this was done under preparment for exam you can see my git for earlier
