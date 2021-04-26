@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { NAV_PATH } from "../shared/constant";
 import React from "react";
 
-export function Home({ userId, children }) {
+export function Home({ isUserLoggedIn, children }) {
   return (
     <div>
       <h2>Welcome To the Chat app </h2>
 
-      {userId ? (
+      {isUserLoggedIn ? (
         children
       ) : (
         <>
