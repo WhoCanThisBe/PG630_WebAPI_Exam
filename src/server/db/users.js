@@ -18,7 +18,6 @@ function createUser(user) {
     firstName: user.firstName,
     lastName: user.lastName,
     password: user.password,
-    email: user.email,
   };
 
   users.set(newUser.id, newUser);

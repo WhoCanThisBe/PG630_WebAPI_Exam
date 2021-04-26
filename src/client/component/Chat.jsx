@@ -3,14 +3,13 @@ import React, { useState } from "react";
 export function Chat({ user, onSendMessage, chatLog, ...props }) {
   const [message, setMessage] = useState("");
 
-  const username = props.username || "Guest";
-
   function handleSubmitChatMessage(e) {
     e.preventDefault();
     const name = `${user.firstName} ${user.lastName}`;
     onSendMessage({ name, message });
     setMessage("");
   }
+
   function renderMessage(msg) {
     const { id, name, message } = msg;
     return (
@@ -21,11 +20,26 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
   }
 
   return (
-    <aside className={"messagebrowser"}>
-      <h1 className={"messagetitle"}>Message System</h1>
+    <aside
+      className={"chatWindow"}
+      style={{
+        backgroundColor: "orange",
+        border: "2px solid purple",
+        borderRadius: "10px",
+        padding: "10px",
+      }}
+    >
+      <h1
+        className={"title chatBoxTitle"}
+        style={{ backgroundColor: "goldenrod" }}
+      >
+        The amazing chat
+      </h1>
       <div className="chatBox">
-        <p>Welcome {username?.firstName}</p>
-        <div className="messagelog">
+        <p>
+          Welcome {user?.firstName} {user?.lastName}
+        </p>
+        <div className="chatLog" style={{ backgroundColor: "lightblue" }}>
           {chatLog.map((msg) => renderMessage(msg))}
         </div>
       </div>

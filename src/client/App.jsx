@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { NAV_PATH, USER_AUTH_ENDPOINT } from "../shared/constant";
-import { Login } from "./component/Login";
-import { Home } from "./Home";
+import { Chat } from "./component/Chat";
 import { ErrorView } from "./component/ErrorView";
-import SignUp from "./component/SignUp";
-import { fetchJson } from "./lib/http";
 import { Header } from "./component/Header";
-import "./styles.css";
-import { Chat } from "./Chat";
+import { Login } from "./Login";
+import SignUp from "./SignUp";
+import { Home } from "./Home";
+import { fetchJson } from "./lib/http";
 
 export function App() {
   const [user, setUser] = useState(null);
@@ -33,44 +32,49 @@ export function App() {
   const [chatLog, setChatLog] = useState([]);
   const connected = useRef(false);
 
+  function connectWS() {
+    console.log("WS -> Connecting");
+    // host => localhost:3000
+    const ws = new WebSocket(`ws://${window.location.host}`);
+    setClientSocket(ws);
+
+    ws.onopen = (e) => {
+      console.log("WS -> opened", e.target);
+      connected.current = true;
+    };
+
+    ws.onmessage = (e) => {
+      console.log("WS -> Message received", e.data);
+      const { name, id, message } = JSON.parse(e.data);
+
+      setChatLog((prevLog) => [...prevLog, { name, id, message }]);
+    };
+
+    ws.onerror = (e) => {
+      console.error(e);
+    };
+
+    ws.onclose = (e) => {
+      console.log("WS -> Close", e);
+
+      // Link to info on close-code: https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent#status_codes
+      const wasClosedNormally = e.code === 1_000;
+
+      if (connected.current && !wasClosedNormally) {
+        setTimeout(connectWS, 1_000);
+      } else {
+        setTimeout(connectWS, 10_000);
+      }
+      connected.current = false;
+    };
+  }
+
   // useEffect for handling WebSocket connections
   // Adaption of the following: https://github.com/kristiania-pg6301-2021/pg6301-react-and-express-lectures/blob/reference/12/src/client/ChatPage.jsx
   useEffect(() => {
-    function connect() {
-      console.log("WS -> Connecting");
-      // host => localhost:3000
-      const ws = new WebSocket(`ws://${window.location.host}`);
-      setClientSocket(ws);
-
-      ws.onopen = (e) => {
-        console.log("WS -> opened", e.target);
-        connected.current = true;
-      };
-
-      ws.onmessage = (e) => {
-        console.log("WS -> Message received", e.data);
-        const { name, id, message } = JSON.parse(e.data);
-
-        setChatLog((prevLog) => [...prevLog, { name, id, message }]);
-      };
-
-      ws.onerror = (e) => {
-        console.error(e);
-      };
-
-      ws.onclose = (e) => {
-        console.log("WS -> Close", e);
-
-        if (connected.current) {
-          setTimeout(connect, 1_000);
-        } else {
-          setTimeout(connect, 10_000);
-        }
-        connected.current = false;
-      };
-    }
-    connect();
-  }, []);
+    if (!user) return;
+    connectWS();
+  }, [user?.id]);
 
   const handleSendMessage = (json) => {
     clientSocket.send(JSON.stringify(json));
@@ -83,12 +87,13 @@ export function App() {
         onLogout={() => {
           setIsRegistered(false);
           setUser(null);
+          clientSocket.close(1000, "User logout");
         }}
       />
 
       <Switch>
         <Route exact path={NAV_PATH.HOME}>
-          <Home isUserLoggedIn={isRegistered}>
+          <Home isUserLoggedIn={user?.id}>
             <Chat
               user={user}
               chatLog={chatLog}

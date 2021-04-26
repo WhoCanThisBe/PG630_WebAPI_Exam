@@ -14,14 +14,15 @@ const app = express();
 //JSON body parse without bodyparser
 app.use(express.json());
 
+const sessionParser = session({
+  secret: "dasssfdf",
+  resave: false,
+  saveUninitialized: false,
+});
+
 // Express session
-app.use(
-  session({
-    secret: "dasssfdf",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+
+app.use(sessionParser);
 
 const authFields = {
   usernameField: "email",
@@ -63,4 +64,4 @@ app.use((req, res, next) => {
   }
 });
 
-module.exports = app;
+module.exports = { app, sessionParser };

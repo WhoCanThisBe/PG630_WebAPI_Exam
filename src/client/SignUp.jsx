@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { useSubmit } from "../lib/useSubmit";
-import { NAV_PATH, USER_AUTH_ENDPOINT } from "../../shared/constant";
-import { post } from "../lib/http";
+import { useSubmit } from "./lib/useSubmit";
+import { NAV_PATH, USER_AUTH_ENDPOINT } from "../shared/constant";
+import { post } from "./lib/http";
 
 const SignUp = ({ setLoggedIn, ...props }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  //const [userId, setUserId] = useState("");
 
   const [password, setPassword] = useState("");
   const [confirm, onConfirmChange] = useState("");
@@ -29,14 +28,14 @@ const SignUp = ({ setLoggedIn, ...props }) => {
 
   const isTheSame = password === confirm;
 
-  let confirmMsg = isTheSame ? " " : "The typed password does not match";
+  let confirmMsg = isTheSame ? "ok" : "not the same";
 
   return (
     <div className="center">
       <form onSubmit={handleSubmit}>
         <h1>Signup</h1>
         <label>
-          First Name
+          Firstname
           <br />
           <input
             type="text"
@@ -48,7 +47,7 @@ const SignUp = ({ setLoggedIn, ...props }) => {
         <br />
         <br />
         <label>
-          Last Name:
+          Lastname:
           <br />
           <input
             type="text"
@@ -71,7 +70,6 @@ const SignUp = ({ setLoggedIn, ...props }) => {
         </label>
         <br />
         <br />
-
         <label>
           Password:
           <br />

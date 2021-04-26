@@ -5,6 +5,8 @@ const { StatusCode } = require("status-code-enum");
 const userDatabase = require("../db/users");
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
+  req.session.userId = req.user;
+  req.session.userId.password = undefined;
   res.status(StatusCode.SuccessNoContent).send();
 });
 
@@ -23,6 +25,8 @@ router.post("/signup", (req, res) => {
       else res.sendStatus(StatusCode.SuccessCreated);
     });
   });
+  req.session.userId = req.user;
+  req.session.userId.password = undefined;
 });
 
 router.post("/logout", (req, res) => {

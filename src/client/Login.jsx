@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { post } from "../lib/http";
-import { NAV_PATH, USER_AUTH_ENDPOINT } from "../../shared/constant";
+import { post } from "./lib/http";
+import { NAV_PATH, USER_AUTH_ENDPOINT } from "../shared/constant";
 import StatusCode from "status-code-enum";
-import { useSubmit } from "../lib/useSubmit";
+import { useSubmit } from "./lib/useSubmit";
 import { useHistory } from "react-router";
 
 export function Login({ setLoggedIn }) {
-  //const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
