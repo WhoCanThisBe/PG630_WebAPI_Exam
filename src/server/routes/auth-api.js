@@ -3,11 +3,14 @@ const router = express.Router();
 const passport = require("passport");
 const { StatusCode } = require("status-code-enum");
 const userDatabase = require("../db/users");
+const { logInUser } = require("../db/users");
+const { logOutUser } = require("../db/users");
 const { getUserList, logoutUsers } = require("../db/users");
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
   req.session.userId = { ...req.user };
   req.session.userId.password = undefined;
+  logInUser(req.user.id);
   res.status(StatusCode.SuccessNoContent).send();
 });
 
@@ -31,6 +34,11 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
+  console.log("Request: ");
+  console.log(req);
+  console.log("Body: ");
+  console.log(req.user);
+  logOutUser(req.user.id);
   req.logout();
   req.session.destroy();
   res.sendStatus(StatusCode.SuccessNoContent);

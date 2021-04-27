@@ -38,6 +38,10 @@ export function Header({ user, onLogout, ...props }) {
   if (isLoggedIn) {
     buttons = (
       <>
+        <NavLink className="header-button" to={NAV_PATH.SIGNUP}>
+          Register
+        </NavLink>
+
         <button onClick={handleLogout}>LogOut</button>
       </>
     );

@@ -22,19 +22,16 @@ const map = new Map();
 
 wsServer.on("connection", (socket, req) => {
   const userId = req.session.userId;
-  console.log(userId.id);
   map.set(userId.id, socket);
-  console.log("map");
-  console.log(map);
   //sockets.push(socket);
   socket.on("message", (msg) => {
     const { name, message, receiver } = JSON.parse(msg);
     const messageId = index++;
     if (receiver === "all") {
       // Broadcast message to to all
-      map.forEach((v, k) => {
-        if (v) {
-          v.send(JSON.stringify({ messageId, name, message }));
+      map.forEach((val, k) => {
+        if (val) {
+          val.send(JSON.stringify({ messageId, name, message }));
         }
       });
       return;

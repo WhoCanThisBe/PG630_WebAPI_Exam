@@ -3,16 +3,34 @@ const users = new Map();
 function getUser(id) {
   return users.get(id);
 }
+
 function getUserList() {
+  if (users.size === 0) return null;
+
   const loggedInList = [];
 
   for (let user of users.values()) {
-    const { id, firstName } = user;
-    loggedInList.push({ id, firstName });
+    const { id, firstName, loggedIn } = user;
+    if (loggedIn) {
+      loggedInList.push({ id, firstName });
+    }
   }
-  console.log(loggedInList);
+  // console.log(loggedInList);
   return loggedInList;
 }
+
+function logOutUser(id) {
+  const user = getUser(id);
+  user.loggedIn = false;
+  users.set(id, user);
+}
+
+function logInUser(id) {
+  const user = getUser(id);
+  user.loggedIn = true;
+  users.set(id, user);
+}
+
 function verifyUser(id, password) {
   const user = getUser(id);
   if (!user) return false;
@@ -26,6 +44,8 @@ function createUser(user) {
     firstName: user.firstName,
     lastName: user.lastName,
     password: user.password,
+    email: user.email,
+    loggedIn: true,
   };
 
   users.set(newUser.id, newUser);
@@ -42,4 +62,6 @@ module.exports = {
   createUser,
   resetAllUsers,
   getUserList,
+  logOutUser,
+  logInUser,
 };
