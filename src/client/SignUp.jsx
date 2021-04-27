@@ -19,7 +19,6 @@ const SignUp = ({ setLoggedIn, ...props }) => {
     () =>
       post(USER_AUTH_ENDPOINT.SIGNUP, { firstName, lastName, email, password }),
     () => {
-      // TODO: Remove/change this after setting up WebSockets
       // Trigger fetching of userInfo in App
       setLoggedIn();
       history.push(NAV_PATH.HOME);
@@ -40,6 +39,7 @@ const SignUp = ({ setLoggedIn, ...props }) => {
           <input
             type="text"
             value={firstName}
+            placeholder={"Given Name"}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
@@ -52,6 +52,7 @@ const SignUp = ({ setLoggedIn, ...props }) => {
           <input
             type="text"
             value={lastName}
+            placeholder={"Surname"}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
@@ -64,6 +65,7 @@ const SignUp = ({ setLoggedIn, ...props }) => {
           <input
             type="email"
             value={email}
+            placeholder={"Email"}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -76,6 +78,7 @@ const SignUp = ({ setLoggedIn, ...props }) => {
           <input
             type="password"
             value={password}
+            placeholder={"Password"}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
@@ -86,8 +89,9 @@ const SignUp = ({ setLoggedIn, ...props }) => {
           Confirm:
           <br />
           <input
-            type="password"
+            type="type password"
             value={confirm}
+            placeholder={"retype password"}
             onChange={(e) => onConfirmChange(e.target.value)}
             required
           />

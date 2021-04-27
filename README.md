@@ -4,7 +4,7 @@
 [x]  fix to send to a person, but you see name instead of email
 [x]  fix option to send to all font select
 [ ]  fix to send * optional add how you want sendt
-[ ]  log out person will not been seen in the list of logged
+[x]  log out person will not been seen in the list of logged
 [ ]   remember to have  info for the setup
 [] check if short npm i works
 
@@ -12,7 +12,6 @@
 ...
 * [x] A logged in use should be able to register more users in the system
   * * [x] Users should have properties first name, last name and email address
-  * * [ ] Optionally, users can have description
 
 * [x] logged-in user should be able to create messages that are sent to one or more users
 * [x] Users should be able to see messages where they are a recipient or sender
