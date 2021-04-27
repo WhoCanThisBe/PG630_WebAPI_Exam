@@ -10,6 +10,7 @@ const { getUserList, logoutUsers } = require("../db/users");
 router.post("/login", passport.authenticate("local"), (req, res) => {
   req.session.userId = { ...req.user };
   req.session.userId.password = undefined;
+
   logInUser(req.user.id);
   res.status(StatusCode.SuccessNoContent).send();
 });

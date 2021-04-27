@@ -18,7 +18,6 @@ function getUserList() {
   // console.log(loggedInList);
   return loggedInList;
 }
-
 function logOutUser(id) {
   const user = getUser(id);
   user.loggedIn = false;

@@ -4,6 +4,8 @@ const {
   resetAllUsers,
   verifyUser,
   getUserList,
+  logOutUser,
+  logInUser,
 } = require("../../../src/server/db/users");
 
 const user = {
@@ -51,4 +53,15 @@ test("return userList of of created", () => {
 
   //should not return password
   expect(userList[0].password).toBeUndefined();
+});
+
+test("Logged out user should be shown as logged out, and logged in when user logs in again", () => {
+  createUser(user);
+  expect(getUser(user.id).loggedIn).toBe(true);
+
+  logOutUser(user.id);
+  expect(getUser(user.id).loggedIn).toBe(false);
+
+  logInUser(user.id);
+  expect(getUser(user.id).loggedIn).toBe(true);
 });

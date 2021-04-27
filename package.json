@@ -20,7 +20,7 @@
     "start": "concurrently 'npm:server' 'npm:parcel'",
     "parcel": "parcel watch src/client/index.html",
     "server": "nodemon --watch src/server src/server/server.js",
-    "test": "jest",
+    "test": "jest --coverage",
     "prettier": "prettier --write src tests"
   },
   "dependencies": {
