@@ -5,7 +5,7 @@ import { USER_AUTH_ENDPOINT } from "../../shared/constant";
 export function Chat({ user, onSendMessage, chatLog, ...props }) {
   const [message, setMessage] = useState("");
   const [loginList, setLoginList] = useState([]);
-  const [receiver, setReceiver] = useState("");
+  const [receiver, setReceiver] = useState("all");
   useEffect(() => {
     fetchLoggedInlist();
   }, []);
@@ -22,7 +22,7 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
   function handleSubmitChatMessage(e) {
     e.preventDefault();
     const name = `${user.firstName} ${user.lastName}`;
-
+    console.log(receiver);
     onSendMessage({ name, message, receiver });
     setMessage("");
   }
@@ -35,7 +35,6 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
       </p>
     );
   }
-  console.log("loginlist" + loginList);
 
   return (
     <aside
@@ -69,15 +68,19 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
           name={"chatText"}
           onChange={(e) => setMessage(e.target.value)}
         />
+        <label style={{ backgroundColor: "white" }}> choose receiver </label>
         <select
           className={"userList"}
           onChange={(event) => {
             setReceiver(event.target.value);
           }}
         >
-          {loginList.map((val, key) => (
-            <option key={key} value={val}>
-              {val}
+          <option key="all" value={"all"}>
+            send to all
+          </option>
+          {loginList.map((val, i) => (
+            <option key={i} value={val.id}>
+              {val.firstName}
             </option>
           ))}
         </select>

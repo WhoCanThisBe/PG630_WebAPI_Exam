@@ -46,8 +46,6 @@ router.get("/user", (req, res) => {
 
 router.get("/userlist", (req, res) => {
   const loggedInList = getUserList();
-  console.log("Users:");
-  console.log(loggedInList);
   res.status(StatusCode.SuccessOK).json(loggedInList);
 });
 

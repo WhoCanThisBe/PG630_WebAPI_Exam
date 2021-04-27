@@ -24,21 +24,25 @@ wsServer.on("connection", (socket, req) => {
   const userId = req.session.userId;
   console.log(userId.id);
   map.set(userId.id, socket);
-
+  console.log("map");
+  console.log(map);
   //sockets.push(socket);
   socket.on("message", (msg) => {
     const { name, message, receiver } = JSON.parse(msg);
     const messageId = index++;
     if (receiver === "all") {
       // Broadcast message to to all
-      for (const recipient of map) {
-        recipient.send(JSON.stringify({ messageId, name, message }));
-      }
+      map.forEach((v, k) => {
+        if (v) {
+          v.send(JSON.stringify({ messageId, name, message }));
+        }
+      });
       return;
     }
     socket.send(JSON.stringify({ messageId, name, message })); // sends to user
     const receiverSocket = map.get(receiver.toString());
-    receiverSocket.send(JSON.stringify({ messageId, name, message })); // sends to receiver
+    if (receiverSocket)
+      receiverSocket.send(JSON.stringify({ messageId, name, message })); // sends to receiver
   });
   socket.on("close", function () {
     map.delete(userId.id);

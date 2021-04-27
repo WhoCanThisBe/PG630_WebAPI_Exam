@@ -1,7 +1,7 @@
 * [ ] remember to add https when finished 
  * remember to write about the mockup
 
-[ ]  fix to send to a person, but you see name instead of email
+[x]  fix to send to a person, but you see name instead of email
 [ ]  fix option to send to all font select
 [ ]  fix to send * optional add how you want sendt 
 [ ]   log out person will not been seen in the list of logged
@@ -12,7 +12,7 @@
   * * [ ] Users should have properties first name, last name and email address 
   * * [ ] Optionally, users can have description
   
-* [ ] logged-in user should be able to create messages that are sent to one or more users
+* [x] logged-in user should be able to create messages that are sent to one or more users
 * [ ] Users should be able to see messages where they are a recipient or sender
 * [x] Users should be able to respond to messages
 ---

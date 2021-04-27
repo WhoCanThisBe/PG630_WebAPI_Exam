@@ -5,11 +5,12 @@ function getUser(id) {
 }
 function getUserList() {
   const loggedInList = [];
-  console.log("get user");
-  console.log(users);
-  users.forEach((v, k) => {
-    loggedInList.push(k);
-  });
+
+  for (let user of users.values()) {
+    const { id, firstName } = user;
+    loggedInList.push({ id, firstName });
+  }
+  console.log(loggedInList);
   return loggedInList;
 }
 function verifyUser(id, password) {
@@ -20,8 +21,6 @@ function verifyUser(id, password) {
 
 function createUser(user) {
   if (getUser(user.email)) return false;
-  console.log("create user");
-  console.log({ user });
   const newUser = {
     id: user.email,
     firstName: user.firstName,
