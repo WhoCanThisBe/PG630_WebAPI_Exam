@@ -26,10 +26,10 @@ export function Header({ user, onLogout, ...props }) {
   let buttons = (
     <>
       <NavLink className="header-button" to={NAV_PATH.LOGIN}>
-        LogIn
+        Log In
       </NavLink>
       <NavLink className="header-button" to={NAV_PATH.SIGNUP}>
-        SignUp
+        Sign Up
       </NavLink>
     </>
   );
@@ -39,10 +39,10 @@ export function Header({ user, onLogout, ...props }) {
     buttons = (
       <>
         <NavLink className="header-button" to={NAV_PATH.SIGNUP}>
-          Register
+          Register new user
         </NavLink>
 
-        <button onClick={handleLogout}>LogOut</button>
+        <button onClick={handleLogout}>Log Out</button>
       </>
     );
   }
