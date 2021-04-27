@@ -6,7 +6,6 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
   const [message, setMessage] = useState("");
   const [loginList, setLoginList] = useState([]);
   const [receiver, setReceiver] = useState("");
-
   useEffect(() => {
     fetchLoggedInlist();
   }, []);
@@ -14,6 +13,7 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
   const fetchLoggedInlist = async () => {
     try {
       const payload = await fetchJson(USER_AUTH_ENDPOINT.LOGGEDIN);
+      console.log("payload");
       console.log(payload);
       setLoginList(payload);
     } catch (err) {}
@@ -35,6 +35,7 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
       </p>
     );
   }
+  console.log("loginlist" + loginList);
 
   return (
     <aside
