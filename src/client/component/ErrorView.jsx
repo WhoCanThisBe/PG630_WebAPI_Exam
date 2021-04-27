@@ -4,7 +4,7 @@ import React from "react";
 
 export function ErrorView() {
   return (
-    <div>
+    <div data-testid={"testview"}>
       <h1>Not Found 404</h1>
       <Link to={NAV_PATH.HOME}>
         <button>Return to HomePage</button>
