@@ -1,0 +1,54 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    padding: 1rem 4rem;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-button {
+    background-color: #ebe9e4;
+    color: #000000;
+    padding: 1rem;
+    border: 1px solid #787774;
+    border-radius: 5px;
+    margin: 1rem 1rem 0 1rem;
+}
+.header-button:focus,
+.header-button:hover {
+    background-color: #2d1ed6;
+    color: #ebe9e4;
+}
+
+.header-text {
+    align-self: center;
+    font-size: large;
+}
+
+.chatWindow{
+    background-color: lightcyan;
+    border: 2px solid purple;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items:  stretch;
+
+}
+
+.title .chatBoxTitle{
+    background-color: #0074D9;
+}

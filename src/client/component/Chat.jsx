@@ -37,21 +37,8 @@ export function Chat({ user, onSendMessage, chatLog, ...props }) {
   }
 
   return (
-    <aside
-      className={"chatWindow"}
-      style={{
-        backgroundColor: "orange",
-        border: "2px solid purple",
-        borderRadius: "10px",
-        padding: "10px",
-      }}
-    >
-      <h1
-        className={"title chatBoxTitle"}
-        style={{ backgroundColor: "goldenrod" }}
-      >
-        The amazing chat
-      </h1>
+    <aside className={"chatWindow"} style={{}}>
+      <h1 className={"title chatBoxTitle"}>The amazing chat</h1>
       <div className="chatBox">
         <p>
           Welcome {user?.firstName} {user?.lastName}
