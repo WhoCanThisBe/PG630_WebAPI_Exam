@@ -23,7 +23,6 @@ export function App() {
     }
   };
 
-  // TODO: Remove/change this useEffect after setting up WebSockets
   useEffect(() => {
     fetchUserInfo();
   }, [isRegistered]);

@@ -22,4 +22,5 @@ test("test fail to log in", async () => {
   userEvent.click(loginBtn);
 
   expect(await screen.findByText(/invalid/i)).toBeInTheDocument();
+  screen.debug();
 });

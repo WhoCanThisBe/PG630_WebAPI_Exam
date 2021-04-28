@@ -56,4 +56,5 @@ test("type in user info and not the same password on both fields, should show no
   expect(screen.getByDisplayValue("testLastname")).toBeInTheDocument();
   expect(screen.getByDisplayValue("test@mail.com")).toBeInTheDocument();
   expect(screen.getByText("not the same")).toBeInTheDocument();
+  expect(screen.getByText("Sign Up")).toBeInTheDocument();
 });

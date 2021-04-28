@@ -17,10 +17,8 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
 
 router.post("/signup", (req, res) => {
   const user = req.body;
-  console.log(user);
 
   const authorizedUser = userDatabase.createUser(user);
-  console.log(authorizedUser);
   if (!authorizedUser) {
     return res.sendStatus(StatusCode.ClientErrorUnauthorized);
   }

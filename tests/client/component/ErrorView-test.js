@@ -1,4 +1,3 @@
-import * as ReactDOM from "react-dom";
 import * as React from "react";
 import { ErrorView } from "../../../src/client/component/ErrorView";
 import { render, screen } from "@testing-library/react";

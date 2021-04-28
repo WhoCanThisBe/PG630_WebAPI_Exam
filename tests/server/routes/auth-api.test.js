@@ -48,12 +48,11 @@ test("testing to sign in twice with same info ", async () => {
   let response = await request(app).post("/api/signup").send(payload);
   expect(response.statusCode).toBe(201);
 
-  //can't sign up twice with same userId
   response = await request(app).post("/api/signup").send(payload);
   expect(response.statusCode).toBe(401);
 });
 
-test("Test logged in when signing up, and sign out, and sign in ", async () => {
+test("full test of signing with sign out, and sign in ", async () => {
   const payload = {
     firstName: "foo",
     lastName: "test",
@@ -68,12 +67,10 @@ test("Test logged in when signing up, and sign out, and sign in ", async () => {
   expect(response.statusCode).toBe(201);
   const cookie = response.headers["set-cookie"];
 
-  //now we should be able to get it
   response = await request(app).get("/api/user").set("cookie", cookie);
   expect(response.statusCode).toBe(200);
   expect(response.body.userId).toBe(payload.userId);
 
-  //login out
   response = await request(app).post("/api/logout").set("cookie", cookie);
   expect(response.statusCode).toBe(204);
 
