@@ -89,7 +89,7 @@ const SignUp = ({ setLoggedIn, ...props }) => {
           Confirm:
           <br />
           <input
-            type="type password"
+            type="password"
             value={confirm}
             placeholder={"retype password"}
             onChange={(e) => onConfirmChange(e.target.value)}

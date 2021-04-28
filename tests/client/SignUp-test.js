@@ -22,7 +22,6 @@ test("Should render signup inputs and button", () => {
     </MemoryRouter>
   );
 
-  screen.debug();
   expect(screen.getByPlaceholderText(/given/i)).toBeInTheDocument();
   expect(screen.getByPlaceholderText(/sur/i)).toBeInTheDocument();
   expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
