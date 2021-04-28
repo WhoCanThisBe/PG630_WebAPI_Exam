@@ -20,6 +20,7 @@ test("test not showing when there is user logged inn", () => {
   expect(screen.getByText(/you are not logged in/i)).toBeInTheDocument();
   expect(screen.getByText(/sign up/i)).toBeInTheDocument();
   expect(screen.getByText(/log in/i)).toBeInTheDocument();
+  expect(screen.getByText(/home/i)).toBeInTheDocument();
 });
 
 test("test when logged inn", () => {
@@ -32,4 +33,6 @@ test("test when logged inn", () => {
   expect(screen.getByText(/welcome testfirstname/i)).toBeInTheDocument();
   expect(screen.getByText(/register new user/i)).toBeInTheDocument();
   expect(screen.getByText(/log out/i)).toBeInTheDocument();
+  expect(screen.getByText(/home/i)).toBeInTheDocument();
+
 });

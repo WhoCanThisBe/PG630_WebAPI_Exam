@@ -1,15 +1,17 @@
-.app {
+.app{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
     align-items: center;
 }
 
 .main-content {
-    display: flex;
+    display:flex;
     flex-direction: column;
     min-width: 50%;
-    align-items: center;
+    align-items: stretch;
+
 }
 
 .header {

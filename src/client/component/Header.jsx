@@ -25,6 +25,9 @@ export function Header({ user, onLogout, ...props }) {
 
   let buttons = (
     <>
+        <NavLink className="header-button" to={NAV_PATH.HOME}>
+            Home
+        </NavLink>
       <NavLink className="header-button" to={NAV_PATH.LOGIN}>
         Log In
       </NavLink>
@@ -38,6 +41,9 @@ export function Header({ user, onLogout, ...props }) {
   if (isLoggedIn) {
     buttons = (
       <>
+          <NavLink className="header-button" to={NAV_PATH.HOME}>
+              Home
+          </NavLink>
         <NavLink className="header-button" to={NAV_PATH.SIGNUP}>
           Register new user
         </NavLink>

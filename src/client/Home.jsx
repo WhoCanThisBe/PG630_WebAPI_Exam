@@ -4,7 +4,7 @@ import React from "react";
 
 export function Home({ isUserLoggedIn, ...props }) {
   return (
-    <div className={"chatWindow"}>
+    <div className={"app"}>
       <h2>Welcome To the Chat app </h2>
       {isUserLoggedIn ? (
         props.children
